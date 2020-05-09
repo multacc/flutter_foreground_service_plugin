@@ -25,6 +25,7 @@ class FlutterForegroundPlugin {
     String content = "",
     String subtext = "",
     bool chronometer = false,
+    String channelName = 'Foreground service'
   }) async {
     if (onStarted != null) {
       onStartedMethod = onStarted;
@@ -41,6 +42,7 @@ class FlutterForegroundPlugin {
       'content': content,
       'subtext': subtext,
       'chronometer': chronometer,
+      'channelName': channelName
     });
   }
 

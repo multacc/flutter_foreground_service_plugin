@@ -80,8 +80,9 @@ public class FlutterForegroundPlugin implements FlutterPlugin, MethodCallHandler
                 final String content = call.argument("content");
                 final String subtext = call.argument("subtext");
                 final Boolean chronometer = call.argument("chronometer");
+                final String channelName = call.argument("channelName");
 
-                launchForegroundService(icon, title, content, subtext, chronometer);
+                launchForegroundService(icon, title, content, subtext, chronometer, channelName);
                 result.success("startForegroundService");
                 break;
             case "stopForegroundService":
@@ -115,7 +116,7 @@ public class FlutterForegroundPlugin implements FlutterPlugin, MethodCallHandler
         }
     }
 
-    private void launchForegroundService(String icon, String title, String content, String subtext, Boolean chronometer) {
+    private void launchForegroundService(String icon, String title, String content, String subtext, Boolean chronometer, String channelName) {
         Intent intent = new Intent(this.context, FlutterForegroundService.class);
         intent.setAction(START_FOREGROUND_ACTION);
         intent.putExtra("icon", icon);
@@ -123,6 +124,7 @@ public class FlutterForegroundPlugin implements FlutterPlugin, MethodCallHandler
         intent.putExtra("content", content);
         intent.putExtra("subtext", subtext);
         intent.putExtra("chronometer", chronometer);
+        intent.putExtra("channelName", channelName);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(intent);
